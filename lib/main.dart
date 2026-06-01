@@ -1,6 +1,6 @@
 import 'package:easy_vet/core/di/dependency_injection.dart';
-import 'package:easy_vet/features/home/presentation/home_page.dart';
 import 'package:easy_vet/features/home/presentation/home_view_model.dart';
+import 'package:easy_vet/features/main/presentation/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,11 +15,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => getIt<HomeViewModel>(),
-          child: HomePage(),
-        ),
+      home: ChangeNotifierProvider(
+        create: (context) => getIt<HomeViewModel>(),
+        child: MainPage(),
       ),
     );
   }
