@@ -1,3 +1,4 @@
+import 'package:easy_vet/features/home/presentation/home_state.dart';
 import 'package:easy_vet/features/home/presentation/home_view_model.dart';
 import 'package:easy_vet/features/home/presentation/product_item.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +10,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeViewModel viewModel = context.watch<HomeViewModel>();
+    final HomeState state = viewModel.state;
 
-    if (viewModel.isLoading) {
+    if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (viewModel.errorMessage != null) {
-      return Center(child: Text(viewModel.errorMessage!));
+    if (state.errorMessage != null) {
+      return Center(child: Text(state.errorMessage!));
     }
 
     return ListView.builder(
-      itemCount: viewModel.products.length,
+      itemCount: state.products.length,
       itemBuilder: (context, index) =>
-          ProductItem(product: viewModel.products[index]),
+          ProductItem(product: state.products[index]),
     );
   }
 }
