@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class HomeViewModel extends ChangeNotifier {
   final ProductRepository repository;
 
-  HomeViewModel({required this.repository});
+  HomeViewModel({required this.repository}) {
+    loadProducts();
+  }
 
   List<Product> products = [];
   bool isLoading = false;
@@ -23,8 +25,5 @@ class HomeViewModel extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
-
-    
   }
-  
 }
