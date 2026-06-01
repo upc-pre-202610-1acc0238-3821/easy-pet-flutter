@@ -1,4 +1,4 @@
-import 'package:easy_vet/features/home/data/product_service.dart';
+import 'package:easy_vet/features/home/data/product_repository_impl.dart';
 import 'package:easy_vet/features/home/domain/product.dart';
 import 'package:easy_vet/features/home/presentation/product_item.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadProducts() async {
-    List<Product> products = await ProductService().getProducts();
+    List<Product> products = await ProductRepositoryImpl().getProducts();
     setState(() {
       _products = products;
     });
