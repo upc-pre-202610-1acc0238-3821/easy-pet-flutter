@@ -1,5 +1,6 @@
 import 'package:easy_vet/features/home/presentation/home_state.dart';
 import 'package:easy_vet/features/home/presentation/home_view_model.dart';
+import 'package:easy_vet/features/home/presentation/product_detail_page.dart';
 import 'package:easy_vet/features/home/presentation/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +23,18 @@ class HomePage extends StatelessWidget {
 
     return ListView.builder(
       itemCount: state.products.length,
-      itemBuilder: (context, index) =>
-          ProductItem(product: state.products[index]),
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ProductDetailPage(product: state.products[index]),
+            ),
+          );
+        },
+        child: ProductItem(product: state.products[index]),
+      ),
     );
   }
 }
