@@ -1,6 +1,6 @@
 import 'package:easy_vet/core/di/dependency_injection.dart';
+import 'package:easy_vet/features/auth/presentation/login_page.dart';
 import 'package:easy_vet/features/home/presentation/home_view_model.dart';
-import 'package:easy_vet/features/main/presentation/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: ChangeNotifierProvider(
         create: (context) => getIt<HomeViewModel>(),
-        child: MainPage(),
+        child: LoginPage(),
       ),
     );
   }
