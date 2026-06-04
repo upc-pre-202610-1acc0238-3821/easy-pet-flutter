@@ -8,12 +8,15 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Image.network(product.image),
-          Text(product.name),
-          Text('\$${product.price.toStringAsFixed(2)} '),
-        ],
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.network(product.image),
+            Text(product.name),
+            Text('\$${product.price.toStringAsFixed(2)} '),
+          ],
+        ),
       ),
     );
   }
