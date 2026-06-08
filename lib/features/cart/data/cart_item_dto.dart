@@ -1,5 +1,7 @@
+import 'package:easy_vet/features/cart/domain/cart_item.dart';
+
 class CartItemDto {
-  final int id;
+  final int productId;
   final String title;
   final double price;
   final String category;
@@ -7,7 +9,7 @@ class CartItemDto {
   final int quantity;
 
   const CartItemDto({
-    required this.id,
+    required this.productId,
     required this.title,
     required this.price,
     required this.category,
@@ -17,7 +19,7 @@ class CartItemDto {
 
   factory CartItemDto.fromJson(Map<String, dynamic> json) {
     return CartItemDto(
-      id: json['id'],
+      productId: json['productId'],
       title: json['title'],
       price: (json['price'] as num).toDouble(),
       category: json['category'],
@@ -26,5 +28,14 @@ class CartItemDto {
     );
   }
 
-
+  CartItem toDomain() {
+    return CartItem(
+      productId: productId,
+      title: title,
+      price: price,
+      image: image,
+      category: category,
+      quantity: quantity,
+    );
+  }
 }
