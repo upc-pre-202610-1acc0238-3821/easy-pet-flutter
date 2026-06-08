@@ -3,6 +3,10 @@ import 'package:easy_vet/features/auth/data/auth_repository_impl.dart';
 import 'package:easy_vet/features/auth/data/auth_service.dart';
 import 'package:easy_vet/features/auth/domain/auth_repository.dart';
 import 'package:easy_vet/features/auth/presentation/login_view_model.dart';
+import 'package:easy_vet/features/cart/data/cart_item_repository_impl.dart';
+import 'package:easy_vet/features/cart/data/cart_item_service.dart';
+import 'package:easy_vet/features/cart/domain/cart_item_repository.dart';
+import 'package:easy_vet/features/cart/presentation/cart_view_model.dart';
 import 'package:easy_vet/features/home/data/product_repository_impl.dart';
 import 'package:easy_vet/features/home/data/product_service.dart';
 import 'package:easy_vet/features/home/domain/product_repository.dart';
@@ -42,5 +46,18 @@ void setup() {
 
   getIt.registerFactory(
     () => LoginViewModel(repository: getIt<AuthRepository>()),
+  );
+
+  getIt.registerLazySingleton<CartItemService>(() => CartItemService());
+
+  getIt.registerLazySingleton<CartItemRepository>(
+    () => CartItemRepositoryImpl(
+      service: getIt<CartItemService>(),
+      tokenStorage: getIt<TokenStorage>(),
+    ),
+  );
+
+  getIt.registerFactory<CartViewModel>(
+    () => CartViewModel(repository: getIt<CartItemRepository>()),
   );
 }
