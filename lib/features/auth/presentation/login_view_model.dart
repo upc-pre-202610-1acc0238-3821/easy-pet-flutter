@@ -12,17 +12,13 @@ class LoginViewModel extends Cubit<LoginState> {
     emit(LoginLoading());
 
     try {
-      final User? user = await repository.login(
+      final User user = await repository.login(
         email: email,
         password: password,
       );
-      if (user != null) {
-        emit(LoginSuccess(user: user));
-      } else {
-        emit(LoginFailure(error: 'Invalid email or password'));
-      }
+      emit(LoginSuccess(user: user));
     } catch (e) {
-      emit(LoginFailure(error: 'Failed to login: $e'));
+      emit(LoginFailure(error: '$e'));
     }
   }
 }

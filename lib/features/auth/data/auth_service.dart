@@ -9,7 +9,7 @@ class AuthService {
   final String _baseUrl =
       'https://petapi-591531460223.us-central1.run.app/api/users/login';
 
-  Future<LoginResponseDto?> login(LoginRequestDto requestDto) async {
+  Future<LoginResponseDto> login(LoginRequestDto requestDto) async {
     final Uri uri = Uri.parse(_baseUrl);
     final http.Response response = await http.post(
       uri,
@@ -21,6 +21,6 @@ class AuthService {
       final json = jsonDecode(response.body);
       return LoginResponseDto.fromJson(json);
     }
-    return null;
+    throw Exception('Failed to login');
   }
 }
