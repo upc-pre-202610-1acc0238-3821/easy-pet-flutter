@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:easy_vet/features/home/data/product_dto.dart';
+import 'package:easy_vet/features/home/data/remote/product_dto.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {

@@ -1,5 +1,5 @@
-import 'package:easy_vet/features/home/data/product_dto.dart';
-import 'package:easy_vet/features/home/data/product_service.dart';
+import 'package:easy_vet/features/home/data/remote/product_dto.dart';
+import 'package:easy_vet/features/home/data/remote/product_service.dart';
 import 'package:easy_vet/features/home/domain/product.dart';
 import 'package:easy_vet/features/home/domain/product_repository.dart';
 
