@@ -1,5 +1,7 @@
+import 'package:easy_vet/features/cart/domain/cart_item.dart';
 import 'package:easy_vet/features/cart/presentation/cart_state.dart';
 import 'package:easy_vet/features/cart/presentation/cart_view_model.dart';
+import 'package:easy_vet/features/cart/presentation/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +23,10 @@ class CartPage extends StatelessWidget {
 
     return ListView.builder(
       itemCount: state.items.length,
-      itemBuilder: (context, index) => Text(state.items[index].title),
+      itemBuilder: (context, index) {
+        final CartItem item = state.items[index];
+        return Item(item: item);
+      },
     );
   }
 }
