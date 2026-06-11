@@ -10,8 +10,18 @@ class ProductItem extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Image.network(product.image, height: 192),
-          Text(product.name, style: TextStyle(fontWeight: FontWeight.bold)),
+          Expanded(
+            child: Hero(tag: product.id, child: Image.network(product.image)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              product.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );
