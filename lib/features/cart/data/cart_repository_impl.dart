@@ -39,4 +39,17 @@ class CartRepositoryImpl implements CartRepository {
       token
     );
   }
+  
+  @override
+  Future<void> removeFromCart(int productId) async {
+    final String? token = await tokenStorage.getToken();
+
+    if (token == null) {
+      throw Exception('No token found');
+    }
+    await service.addToCart(
+      CartItemRequestDto(productId: productId, quantity: 0),
+      token
+    );
+  }
 }

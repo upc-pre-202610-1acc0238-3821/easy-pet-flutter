@@ -25,7 +25,16 @@ class CartPage extends StatelessWidget {
       itemCount: state.items.length,
       itemBuilder: (context, index) {
         final CartItem item = state.items[index];
-        return Item(item: item);
+        return Dismissible(
+          key: Key('${item.productId}'),
+          onDismissed: (direction) {
+            viewModel.addToCart(
+              item.productId,
+              0,
+            ); // Implement remove from cart functionality here
+          },
+          child: Item(item: item),
+        );
       },
     );
   }
