@@ -1,10 +1,10 @@
 import 'package:easy_vet/features/cart/domain/cart_item.dart';
-import 'package:easy_vet/features/cart/domain/cart_item_repository.dart';
+import 'package:easy_vet/features/cart/domain/cart_repository.dart';
 import 'package:easy_vet/features/cart/presentation/cart_state.dart';
 import 'package:flutter/material.dart';
 
 class CartViewModel extends ChangeNotifier {
-  final CartItemRepository repository;
+  final CartRepository repository;
   CartState cartState = CartState();
 
   CartViewModel({required this.repository}) {
@@ -22,5 +22,15 @@ class CartViewModel extends ChangeNotifier {
       cartState = cartState.copyWith(errorMessage: '$e', isLoading: false);
     }
     notifyListeners();
+  }
+
+  Future<void> addToCart(int productId, int quantity) async {
+    try {
+      await repository.addToCart(productId, quantity);
+      getCartItems();
+    } catch (e) {
+      cartState = cartState.copyWith(errorMessage: '$e');
+      notifyListeners();
+    }
   }
 }
