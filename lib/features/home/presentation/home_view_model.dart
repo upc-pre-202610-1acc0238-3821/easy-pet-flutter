@@ -1,3 +1,4 @@
+import 'package:easy_vet/core/resource/resource.dart';
 import 'package:easy_vet/features/home/domain/product.dart';
 import 'package:easy_vet/features/home/domain/product_repository.dart';
 import 'package:easy_vet/features/home/presentation/home_state.dart';
@@ -15,14 +16,18 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> loadProducts() async {
     state = state.copyWith(isLoading: true, errorMessage: null);
     notifyListeners();
-    try {
-      final List<Product> products = await repository.getProducts();
-      state = state.copyWith(products: products, isLoading: false);
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'Failed to load products: $e',
-      );
+    final resource = await repository.getProducts();
+
+    switch (resource) {
+      case Success<List<Product>>():
+        state = state.copyWith(isLoading: false, products: resource.data);
+        break;
+      case Error<List<Product>>():
+        state = state.copyWith(
+          isLoading: false,
+          errorMessage: resource.message,
+        );
+        break;
     }
     notifyListeners();
   }
