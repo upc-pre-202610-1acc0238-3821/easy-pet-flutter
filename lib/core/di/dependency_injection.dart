@@ -1,3 +1,4 @@
+import 'package:easy_vet/core/storage/app_database.dart';
 import 'package:easy_vet/core/storage/token_storage.dart';
 import 'package:easy_vet/features/auth/data/auth_repository_impl.dart';
 import 'package:easy_vet/features/auth/data/auth_service.dart';
@@ -7,6 +8,7 @@ import 'package:easy_vet/features/cart/data/cart_repository_impl.dart';
 import 'package:easy_vet/features/cart/data/cart_service.dart';
 import 'package:easy_vet/features/cart/domain/cart_repository.dart';
 import 'package:easy_vet/features/cart/presentation/cart_view_model.dart';
+import 'package:easy_vet/features/home/data/local/product_dao.dart';
 import 'package:easy_vet/features/home/data/repositories/product_repository_impl.dart';
 import 'package:easy_vet/features/home/data/remote/product_service.dart';
 import 'package:easy_vet/features/home/domain/product_repository.dart';
@@ -19,8 +21,17 @@ final getIt = GetIt.instance;
 void setup() {
   getIt.registerLazySingleton<ProductService>(() => ProductService());
 
+  getIt.registerLazySingleton<AppDatabase>(() => AppDatabase());
+
+  getIt.registerLazySingleton<ProductDao>(
+    () => ProductDao(appDatabase: getIt<AppDatabase>()),
+  );
+
   getIt.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(service: getIt<ProductService>()),
+    () => ProductRepositoryImpl(
+      service: getIt<ProductService>(),
+      dao: getIt<ProductDao>(),
+    ),
   );
 
   getIt.registerFactory(

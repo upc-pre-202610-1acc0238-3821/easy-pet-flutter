@@ -23,7 +23,8 @@ class AppDatabase {
           id INTEGER PRIMARY KEY,
           name TEXT,
           price REAL,
-          image TEXT
+          image TEXT,
+          description TEXT
         )
       ''');
       },

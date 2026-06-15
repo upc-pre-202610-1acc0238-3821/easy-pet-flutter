@@ -3,12 +3,14 @@ class ProductEntity {
   final String name;
   final double price;
   final String image;
+  final String description;
 
   ProductEntity({
     required this.id,
     required this.name,
     required this.price,
     required this.image,
+    required this.description,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +19,7 @@ class ProductEntity {
       'name': name,
       'price': price,
       'image': image,
+      'description': description,
     };
   }
   
@@ -26,6 +29,7 @@ class ProductEntity {
       name: map['name'],
       price: map['price'],
       image: map['image'],
+      description: map['description'],
     );
   }
 }
