@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_vet/features/cart/presentation/cart_view_model.dart';
 import 'package:easy_vet/features/home/domain/product.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,16 @@ class ProductDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(tag: product.id, child: Image.network(product.image)),
+              Hero(
+                tag: product.id,
+                child: CachedNetworkImage(
+                  imageUrl: product.image,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error)),
+                ),
+              ),
               Text(
                 product.name,
                 style: const TextStyle(
