@@ -35,7 +35,12 @@ class ProductDto {
   }
 
   Product toDomain() {
-    return Product(id: id, name: title, price: price, image: image);
+    return Product(
+      id: id,
+      name: title,
+      price: price,
+      image: image,
+      description: description,
+    );
   }
-  
 }
